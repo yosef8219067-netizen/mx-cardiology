@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>د. يوسف مصطفى - استشاري أمراض القلب والأوعية الدموية</title>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Cairo & Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- ربط ملف التنسيقات الخارجية CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- هيدر الصفحة بتصميم القلب الداكن -->
+        <div class="header-bg">
+            <div class="header-badge">
+                <i class="fas fa-heartbeat"></i>
+                <span>كارت طبي تفاعلي</span>
+            </div>
+            <div class="ecg-line"></div>
+        </div>
+
+        <!-- شعار العيادة -->
+        <div class="logo-wrapper">
+            <img src="https://via.placeholder.com/150/1e3a8a/ffffff?text=YMX" alt="شعار دكتور يوسف مصطفى" class="logo-img">
+        </div>
+
+        <!-- المعلومات الشخصية -->
+        <div class="info-section">
+            <h1 class="doctor-name">د. يوسف مصطفى</h1>
+            <div class="doctor-title">
+                <i class="fas fa-stethoscope"></i>
+                <span>استشاري أمراض القلب والأوعية الدموية</span>
+            </div>
+            <div class="clinic-brand">𓆩⚡𓆩 YMX — XALTED 𓆩⚡𓆩</div>
+            <p class="bio-text">
+                متخصصون في تشخيص وعلاج أمراض القلب، رسم القلب، الإيكو، ومتابعة حالات ضغط الدم والقسطرة القلبية بأحدث التقنيات.
+            </p>
+        </div>
+
+        <!-- زر حفظ الكارت -->
+        <div class="action-main">
+            <button class="btn-save-contact" onclick="downloadVCard()">
+                <i class="fas fa-user-plus"></i>
+                <span>حفظ الرقم في هاتفك</span>
+            </button>
+        </div>
+
+        <!-- أزرار التواصل السريع -->
+        <div class="quick-grid">
+            <a href="tel:01026745279" class="grid-card">
+                <div class="card-icon icon-call">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="card-info">
+                    <h4>اتصال مباشر</h4>
+                    <p>مكالمة فورية</p>
+                </div>
+            </a>
+
+            <a href="https://wa.me/201026745279" target="_blank" class="grid-card">
+                <div class="card-icon icon-wa">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="card-info">
+                    <h4>واتساب العيادة</h4>
+                    <p>محادثة حجز</p>
+                </div>
+            </a>
+
+            <div class="grid-card" onclick="openModal()" style="cursor: pointer;">
+                <div class="card-icon icon-qr">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <div class="card-info">
+                    <h4>رمز QR</h4>
+                    <p>مسح الكارت</p>
+                </div>
+            </div>
+
+            <a href="https://maps.google.com" target="_blank" class="grid-card">
+                <div class="card-icon icon-location">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="card-info">
+                    <h4>موقع العيادة</h4>
+                    <p>خرائط Google</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- الخدمات الطبية -->
+        <div class="services-section">
+            <div class="section-title">
+                <i class="fas fa-notes-medical"></i>
+                <span>خدمات العيادة المتخصصة</span>
+            </div>
+            <div class="services-list">
+                <div class="service-tag"><i class="fas fa-wave-square"></i> رسم القلب (ECG)</div>
+                <div class="service-tag"><i class="fas fa-heartbeat"></i> موجات إيكو للقلب</div>
+                <div class="service-tag"><i class="fas fa-stethoscope"></i> متابعة الضغط</div>
+                <div class="service-tag"><i class="fas fa-user-md"></i> استشارات القسطرة</div>
+            </div>
+        </div>
+
+        <!-- صندوق الرقم والنسخ -->
+        <div class="phone-box-wrapper">
+            <div class="phone-box">
+                <div class="phone-details">
+                    <p>رقم حجز العيادة</p>
+                    <span id="phoneNum">01026745279</span>
+                </div>
+                <button class="btn-copy" onclick="copyPhone()">
+                    <i class="far fa-copy"></i>
+                    <span id="copyBtnText">نسخ الرقم</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- حقوق الفوتر -->
+        <div class="footer-credits">
+            عيادة YMX — XALTED CARDIOLOGY CLINIC © 2026
+        </div>
+    </div>
+
+    <!-- نافذة QR Code المنبثقة -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h3 class="modal-title">مسح رمز QR الكارت</h3>
+            <p class="modal-desc">امسح الكود بكاميرا الموبايل لمشاركة الكارت</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/201026745279" alt="QR Code" class="qr-img">
+            <button class="btn-save-contact modal-btn" onclick="closeModal()">إغلاق النافذة</button>
+        </div>
+    </div>
+
+    <script>
+        // دالة نسخ الرقم
+        function copyPhone() {
+            const phone = "01026745279";
+            navigator.clipboard.writeText(phone).then(() => {
+                const btnText = document.getElementById('copyBtnText');
+                btnText.innerText = "تم النسخ!";
+                setTimeout(() => {
+                    btnText.innerText = "نسخ الرقم";
+                }, 2000);
+            });
+        }
+
+        // تحكم النافذة المنبثقة QR
+        function openModal() {
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        // إنشاء وتنزيل ملف جهة الاتصال (vCard)
+        function downloadVCard() {
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+N:مصطفى;د. يوسف;;;
+FN:د. يوسف مصطفى
+ORG:YMX — XALTED CARDIOLOGY CLINIC
+TITLE:استشاري أمراض القلب والأوعية الدموية
+TEL;TYPE=CELL:01026745279
+END:VCARD`;
+
+            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Dr_Youssef_Mustafa.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
